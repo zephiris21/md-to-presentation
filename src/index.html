@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Markdown to Presentation</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/themes.css">
+    <!-- 코드 에디터를 위한 CodeMirror 라이브러리 추가 -->
+    <link rel="stylesheet" href="lib/codemirror/codemirror.css">
+    <link rel="stylesheet" href="lib/codemirror/theme/dracula.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- 상단 툴바 -->
+        <header class="toolbar">
+            <div class="logo">MD2Slides</div>
+            <div class="tools">
+                <button id="btn-open" class="btn">파일 열기</button>
+                <button id="btn-save" class="btn">저장</button>
+                <select id="theme-selector" class="select">
+                    <option value="theme1">기본 테마</option>
+                    <option value="theme2">다크 테마</option>
+                </select>
+                <button id="btn-export-pdf" class="btn primary">PDF 내보내기</button>
+            </div>
+        </header>
+
+        <!-- 메인 콘텐츠 영역 (에디터 + 프리뷰) -->
+        <main class="content-container">
+            <!-- 마크다운 에디터 패널 -->
+            <div class="editor-panel">
+                <div class="panel-header">
+                    <h3>마크다운 에디터</h3>
+                </div>
+                <div class="editor-container">
+                    <textarea id="markdown-editor"></textarea>
+                </div>
+            </div>
+
+            <!-- 프리뷰 패널 -->
+            <div class="preview-panel">
+                <div class="panel-header">
+                    <h3>프리뷰</h3>
+                    <div class="preview-controls">
+                        <button id="btn-preview-mode" class="btn small">슬라이드 모드</button>
+                    </div>
+                </div>
+                <div class="preview-container">
+                    <div id="preview-content"></div>
+                </div>
+            </div>
+        </main>
+
+        <!-- 하단 상태 바 -->
+        <footer class="statusbar">
+            <div class="status-info">준비됨</div>
+            <div class="slide-info">슬라이드: <span id="slide-count">0</span></div>
+        </footer>
+    </div>
+
+    <!-- 모달 대화상자 (PDF 내보내기 옵션) -->
+    <div id="export-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>PDF 내보내기 설정</h3>
+                <button class="btn-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="pdf-filename">파일 이름:</label>
+                    <input type="text" id="pdf-filename" class="input" value="presentation.pdf">
+                </div>
+                <div class="form-group">
+                    <label for="pdf-quality">품질:</label>
+                    <select id="pdf-quality" class="select">
+                        <option value="standard">표준</option>
+                        <option value="high">고품질</option>
+                    </select>
+                </div>
+                <div class="form-group checkbox">
+                    <input type="checkbox" id="include-fonts" checked>
+                    <label for="include-fonts">시스템 폰트 사용</label>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="btn-cancel-export" class="btn">취소</button>
+                <button id="btn-confirm-export" class="btn primary">내보내기</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 스크립트 -->
+    <script src="lib/codemirror/codemirror.js"></script>
+    <script src="lib/codemirror/mode/markdown/markdown.js"></script>
+    <script src="js/markdown-parser.js"></script>
+    <script src="js/html-renderer.js"></script>
+    <script src="js/pdf-generator.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,6 @@
+# Node.js 불필요한 파일들 제외
+node_modules/
+my-electron-app/
+package-lock.json
+.DS_Store
+*.log
